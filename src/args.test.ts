@@ -27,3 +27,9 @@ test("rejects trailing line terminators in either argument", () => {
     assert.throws(() => parseTarget("a/b", `1${suffix}`), UsageError);
   }
 });
+test("rejects trailing line terminators in either argument", () => {
+  for (const suffix of ["\n", "\r\n", "\r"]) {
+    assert.throws(() => parseTarget(`a/b${suffix}`, "1"), UsageError);
+    assert.throws(() => parseTarget("a/b", `1${suffix}`), UsageError);
+  }
+});
